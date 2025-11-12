@@ -13,11 +13,12 @@
     "@nuxt/eslint": "^1.10.0",
     "@nuxt/image": "^2.0.0",
     "@nuxt/ui": "^4.1.0",
+    "@pinia/nuxt": "^0.11.3",
     "eslint": "^9.39.1",
     "nuxt": "^4.2.0",
+    "pinia": "^3.0.4",
     "typescript": "^5.9.3",
     "vue": "^3.5.22",
-    "vue-router": "^4.6.3",
-    "@nuxtjs/tailwindcss": "latest"
+    "vue-router": "^4.6.3"
   }
 }

@@ -1,30 +1,22 @@
 <script setup lang="ts">
+import { usePostStore } from '~/stores/post'
+const postStore = usePostStore()
+await postStore.fetch()
 
-interface Post {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-}
-
-// Kita ambil 10 posts pertama saja dari API eksternal
-const API_URL = 'https://jsonplaceholder.typicode.com/posts?_limit=10';
-
-// 'await' akan "menunggu" data ini selesai di server
-const { data: posts, pending, error } = await useFetch<Post[]>(API_URL);
+const { loading, error, posts } = storeToRefs(postStore)
 </script>
 
 <template>
   <div>
     <h1>Daftar Posts</h1>
 
-    <div v-if="pending">
+    <div v-if="loading">
       Sedang memuat data...
     </div>
 
     <div v-else-if="error">
       <p>Maaf, terjadi kesalahan saat mengambil data:</p>
-      <pre>{{ error.message }}</pre>
+      <pre>{{ error }}</pre>
     </div>
 
     <ul v-else-if="posts">
