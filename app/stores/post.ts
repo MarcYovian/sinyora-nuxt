@@ -14,14 +14,14 @@ export const usePostStore = defineStore('post', {
   actions: {
     async fetch() {
       this.loading = true;
+      this.error = null;
       try {
-        const res = await fetch('https://jsonplaceholder.typicode.com/posts');
-        const data: Post[] = await res.json();
+        const data = await $fetch<Post[]>('/api/posts');
         this.posts = data;
         
-      } catch (error) {
+      } catch (error: any) {
         console.error('Error fetching posts:', error);
-        this.error = 'Failed to fetch posts';
+        this.error = error.data?.message || 'Failed to fetch posts';
       } finally {
         this.loading = false;
       }
